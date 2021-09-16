@@ -1,12 +1,13 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React, { useRef } from "react"
+import { Link, useHistory } from "react-router-dom"
 import "./Auth.css"
 
 
-export const Login = props => {
-    const email = React.createRef()
-    const password = React.createRef()
-    const invalidDialog = React.createRef()
+export const Login = () => {
+    const username = useRef()
+    const password = useRef()
+    const invalidDialog = useRef()
+    const history = useHistory()
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -18,7 +19,7 @@ export const Login = props => {
                 "Accept": "application/json"
             },
             body: JSON.stringify({
-                username: email.current.value,
+                username: username.current.value,
                 password: password.current.value
             })
         })
@@ -26,7 +27,7 @@ export const Login = props => {
             .then(res => {
                 if ("valid" in res && res.valid && "token" in res) {
                     localStorage.setItem( "lu_token", res.token )
-                    props.history.push("/")
+                    history.push("/")
                 }
                 else {
                     invalidDialog.current.showModal()
@@ -37,7 +38,7 @@ export const Login = props => {
     return (
         <main className="container--login">
             <dialog className="dialog dialog--auth" ref={invalidDialog}>
-                <div>Email or password was not valid.</div>
+                <div>Username or password was not valid.</div>
                 <button className="button--close" onClick={e => invalidDialog.current.close()}>Close</button>
             </dialog>
             <section>
@@ -45,8 +46,8 @@ export const Login = props => {
                     <h1>Level Up</h1>
                     <h2>Please sign in</h2>
                     <fieldset>
-                        <label htmlFor="inputEmail"> Email address </label>
-                        <input ref={email} type="email" id="email" className="form-control"  placeholder="Email address" required autoFocus />
+                        <label htmlFor="inputUsername"> Username address </label>
+                        <input ref={username} type="username" id="username" className="form-control"  placeholder="Username address" required autoFocus />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="inputPassword"> Password </label>
