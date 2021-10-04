@@ -5,24 +5,28 @@ import { NavBar } from "./nav/NavBar"
 import { Login } from "./auth/Login"
 import { Register } from "./auth/Register"
 
-export const LevelUp = () => {
-    return <>
-        <Route path="/">
-            {
-                localStorage.getItem("lu_token") ?
-                    <>
+export const LevelUp = () => (
+    <>
+        <Route render={() => {
+            if (localStorage.getItem("lu_token")) {
+                return <>
+                    <Route>
                         <NavBar />
                         <ApplicationViews />
-                    </>
-                    :
-                    <Redirect to="/login" />
+                    </Route>
+                </>
+            } else {
+                return <Redirect to="/login" />
             }
-        </Route>
+        }} />
+
         <Route path="/login">
             <Login />
         </Route>
+
         <Route path="/register">
             <Register />
         </Route>
+
     </>
-}
+)

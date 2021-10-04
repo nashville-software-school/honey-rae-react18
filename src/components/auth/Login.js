@@ -26,7 +26,7 @@ export const Login = () => {
             .then(res => res.json())
             .then(res => {
                 if ("valid" in res && res.valid && "token" in res) {
-                    localStorage.setItem( "lu_token", res.token )
+                    localStorage.setItem("lu_token", res.token)
                     history.push("/")
                 }
                 else {
@@ -47,14 +47,14 @@ export const Login = () => {
                     <h2>Please sign in</h2>
                     <fieldset>
                         <label htmlFor="inputUsername"> Username address </label>
-                        <input ref={username} type="username" id="username" className="form-control"  placeholder="Username address" required autoFocus />
+                        <input ref={username} type="username" id="username" className="form-control" placeholder="Username address" required autoFocus />
                     </fieldset>
                     <fieldset>
                         <label htmlFor="inputPassword"> Password </label>
-                        <input ref={password} type="password" id="password" className="form-control"  placeholder="Password" required />
+                        <input ref={password} type="password" id="password" className="form-control" placeholder="Password" required />
                     </fieldset>
                     <fieldset style={{
-                        textAlign:"center"
+                        textAlign: "center"
                     }}>
                         <button className="btn btn-1 btn-sep icon-send" type="submit">Sign In</button>
                     </fieldset>
