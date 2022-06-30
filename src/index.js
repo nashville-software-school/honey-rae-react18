@@ -1,14 +1,12 @@
-import React from "react"
-import ReactDOM from "react-dom"
-import { BrowserRouter as Router } from "react-router-dom"
-import { LevelUp } from "./components/LevelUp.js"
+import { createRoot } from "react-dom/client"
 import "./index.css"
+import { BrowserRouter } from "react-router-dom"
+import { LevelUp } from './LevelUp'
 
-ReactDOM.render(
-    <React.StrictMode>
-        <Router>
-            <LevelUp />
-        </Router>
-    </React.StrictMode>,
-    document.getElementById("root")
+const container = document.getElementById("root")
+const root = createRoot(container)
+root.render(
+    <BrowserRouter>
+        <LevelUp />
+    </BrowserRouter>
 )
