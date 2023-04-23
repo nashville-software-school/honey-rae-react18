@@ -14,7 +14,7 @@ export const TicketForm = () => {
     evt.preventDefault()
 
     addTicket(ticket)
-      .then(() => navigate("/tickets"))
+      .then(() => navigate("/"))
   }
 
   return (

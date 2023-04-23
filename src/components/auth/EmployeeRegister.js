@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState } from "react"
-import { useHistory } from "react-router-dom"
-import "./Login.css"
+import { useNavigate } from "react-router-dom"
+import "./Auth.css"
 import { registerUser } from "../../managers/AuthManager";
 
 export const EmployeeRegister = (props) => {
   const [employee, setEmployee] = useState({ "account_type": "employee" })
   const [serverFeedback, setFeedback] = useState("")
   const conflictDialog = useRef()
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const handleRegister = (e) => {
     e.preventDefault()
@@ -22,7 +22,7 @@ export const EmployeeRegister = (props) => {
       })
       .then(createdUser => {
         localStorage.setItem("honeyrae", JSON.stringify(createdUser))
-        history.push("/")
+        navigate("/")
       })
       .catch(error => {
         setFeedback(JSON.parse(error.message).message)

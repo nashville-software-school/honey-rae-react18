@@ -1,42 +1,62 @@
-const getTicketById = (id) => {
-  return fetch(`http://localhost:8000/tickets/${id}`)
+import { getToken } from "../utils/getToken"
+
+export const getTicketById = (id) => {
+  return fetch(`http://localhost:8000/tickets/${id}`, {
+    headers: {
+      Authorization: `Token ${getToken()}`
+    }
+  })
     .then(res => res.json())
 }
 
-const addTicket = (ticket) => {
+export const addTicket = (ticket) => {
   return fetch("http://localhost:8000/tickets", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: `Token ${getToken()}`
     },
     body: JSON.stringify(ticket)
   })
     .then(res => res.json())
 }
 
-const getAllTickets = () => {
-  return fetch("http://localhost:8000/tickets")
+export const getAllTickets = () => {
+  return fetch("http://localhost:8000/tickets", {
+    headers: {
+      Authorization: `Token ${getToken()}`
+    }
+  })
     .then(res => res.json())
 }
 
-const searchTicketsByStatus = (status) => {
-  return fetch(`http://localhost:8000/tickets?status=${status}`)
+export const searchTicketsByStatus = (status) => {
+  return fetch(`http://localhost:8000/tickets?status=${status}`, {
+    headers: {
+      Authorization: `Token ${getToken()}`
+    }
+  })
     .then(res => res.json())
 }
 
-const updateTicket = (ticket) => {
+export const updateTicket = (ticket) => {
   return fetch(`http://localhost:8000/tickets/${ticket.id}`, {
     method: "PUT",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: `Token ${getToken()}`
     },
     body: JSON.stringify(ticket)
   })
 }
 
-const deleteTicket = (id) => {
+export const deleteTicket = (id) => {
   return fetch(`http://localhost:8000/tickets/${id}`, {
-    method: "DELETE"
-  })
+    method: "DELETE",
+    headers: {
+      Authorization: `Token ${getToken()}`
+    }
+  }
+  )
 }
 

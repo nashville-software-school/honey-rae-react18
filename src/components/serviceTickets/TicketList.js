@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { isStaff } from "../../utils/isStaff"
 import { TicketCard } from "./TicketCard"
+import { getAllTickets, searchTicketsByStatus } from "../../managers/TicketManager"
 import "./Tickets.css"
 
 export const TicketList = () => {
@@ -10,7 +11,7 @@ export const TicketList = () => {
   const navigate = useNavigate()
 
   useEffect(() => {
-    fetchAllTickets().then((res) => setTickets(res))
+    getAllTickets().then((res) => setTickets(res))
   }, [])
 
   useEffect(() => {

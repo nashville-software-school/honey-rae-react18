@@ -13,16 +13,16 @@ export const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault()
     const user = {
-      username: username.current.value,
+      email: username.current.value,
       password: password.current.value
     }
     loginUser(user)
       .then(authInfo => {
         if (authInfo.valid) {
           localStorage.setItem("honeyrae", JSON.stringify(authInfo))
-          history.push("/")
+          navigate("/")
         } else {
-          existDialog.current.showModal()
+          invalidDialog.current.showModal()
         }
       })
   }

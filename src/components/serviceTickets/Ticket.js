@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { useNavigate, useParams } from "react-router-dom"
 import { isStaff } from "../../utils/isStaff"
+import { getAllEmployees } from "../../managers/EmployeeManager"
+import { getTicketById, deleteTicket, updateTicket } from "../../managers/TicketManager"
 
 export const Ticket = () => {
   const [ticket, setTicket] = useState({})
@@ -26,11 +28,11 @@ export const Ticket = () => {
     }, []
   )
 
-  const deleteTicket = () => {
-    deleteTicket(ticketId).then(() => navigate("/tickets"))
+  const deleteTicketEvent = () => {
+    deleteTicket(ticketId).then(() => navigate("/"))
   }
 
-  const updateTicket = (evt) => {
+  const updateTicketEvent = (evt) => {
     const updatedTicket = {
       ...ticket,
       employee: parseInt(evt.target.value)
@@ -55,7 +57,7 @@ export const Ticket = () => {
         <label>Assign to:</label>
         <select
           value={ticket.employee?.id}
-          onChange={updateTicket}>
+          onChange={updateTicketEvent}>
           <option value="0">Choose...</option>
           {
             employees.map(e => <option key={`employee--${e.id}`} value={e.id}>{e.full_name}</option>)
@@ -89,7 +91,7 @@ export const Ticket = () => {
           {
             isStaff()
               ? <></>
-              : <button onClick={deleteTicket}>Delete</button>
+              : <button onClick={deleteTicketEvent}>Delete</button>
           }
         </footer>
 

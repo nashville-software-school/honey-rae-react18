@@ -1,24 +1,31 @@
-// create a function that returns a fetch call from http://localhost:8000/employees/1
+import { getToken } from "../utils/getToken"
 
-const getEmployeeById = (id) => {
-  return fetch(`http://localhost:8000/employees/${id}`)
+export const getEmployeeById = (id) => {
+  return fetch(`http://localhost:8000/employees/${id}`, {
+    headers: {
+      Authorization: `Token ${getToken()}`
+    }
+  })
     .then(res => res.json())
 }
 
-// create a function that returns a post fetch call from http://localhost:8000/employees
-const addEmployee = (employee) => {
+export const addEmployee = (employee) => {
   return fetch("http://localhost:8000/employees", {
     method: "POST",
     headers: {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: `Token ${getToken()}`
     },
     body: JSON.stringify(employee)
   })
     .then(res => res.json())
 }
 
-// create a function that returns a get fetch call from http://localhost:8000/employees
-const getAllEmployees = () => {
-  return fetch("http://localhost:8000/employees")
+export const getAllEmployees = () => {
+  return fetch("http://localhost:8000/employees", {
+    headers: {
+      Authorization: `Token ${getToken()}`
+    }
+  })
     .then(res => res.json())
 }
