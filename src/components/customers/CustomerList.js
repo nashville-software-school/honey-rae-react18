@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { getAllCustomers } from "../../managers/CustomerManager"
 
 export const CustomerList = () => {
   const [customers, setCustomers] = useState([])
