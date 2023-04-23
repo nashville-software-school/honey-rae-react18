@@ -19,5 +19,4 @@ export const registerUser = (user) => {
     },
     body: JSON.stringify(user)
   })
-    .then(res => res.json())
 }
